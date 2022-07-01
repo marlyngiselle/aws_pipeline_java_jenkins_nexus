@@ -8,7 +8,7 @@ pipeline {
 
         stage('Code') {
             steps {
-                git 'https://github.com/marlyngiselle/aws_pipeline_java_jenkins_nexus'
+                git 'https://github.com/marlyngiselle/aws_pipeline_java_jenkins_nexus.git'
             }
         }
 
