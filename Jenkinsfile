@@ -1,16 +1,21 @@
 pipeline {
+    agent {'any'}
 
-    agent { label 'agente1' }
-
-    tools { maven "supermaven" }
+    tools { maven "maven" }
 
     stages {
 
+        stage('Code') {
+            steps {
+                git 'https://github.com/marlyngiselle/aws_pipeline_java_jenkins_nexus'
+            }
+        }
+
         stage('Build') {
             steps {
-                sh 'mvn clean install'
-                sh 'docker stop contenedor || echo "no hay contenedor para detener"'
-                sh 'docker rm contenedor || echo "no hay contenedor para remover"'
+                // sh 'mvn clean install'
+                // sh 'docker stop contenedor'
+                sh 'docker rm contenedor'
                 sh 'docker build . -t registrycicd:8085/${JOB_NAME}:v${BUILD_NUMBER}'
             }
         }
